@@ -95,14 +95,43 @@ extension DashboardViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableSections.count
+        return tableSections[section].cells.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardViewController.self)", for: indexPath)
-        cell.textLabel?.text = tableSections[indexPath.section].cells[indexPath.row].label
+        
+//        cell.textLabel?.text = tableSections[indexPath.section].cells[indexPath.row].label
+                
+        cell.accessoryType = .none
+        var textField: UITextField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        cell.contentView.addSubview(textField)
+        textField.delegate = self
+        textField.tag = 11
+        NSLayoutConstraint.activate([
+            textField.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
+            textField.leadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor),
+            textField.centerYAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.centerYAnchor),
+            textField.trailingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.trailingAnchor)
+        ])
+        
         return cell
     }
     
 }
+
+
+extension DashboardViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print(textField.tag)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print(textField.text)
+    }
+    
+}
+

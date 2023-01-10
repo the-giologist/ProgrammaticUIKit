@@ -39,6 +39,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		710645B9296DBD71006A789E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				710645BA296DBDC9006A789E /* Dashboard */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		710645BA296DBDC9006A789E /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
 		E230220D296D135900AEF808 = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +73,7 @@
 		E2302218296D135900AEF808 /* ProgrammaticUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				710645B9296DBD71006A789E /* Scenes */,
 				E2302219296D135900AEF808 /* AppDelegate.swift */,
 				E230221B296D135900AEF808 /* SceneDelegate.swift */,
 				E230222D296D16B900AEF808 /* DashboardViewController.swift */,
@@ -290,6 +306,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -317,6 +334,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
