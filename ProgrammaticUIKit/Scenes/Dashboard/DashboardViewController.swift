@@ -8,21 +8,29 @@
 import UIKit
 
 class DashboardViewController: UITableViewController {
-    var tableSections: [SettingsTableSection] = [
-        SettingsTableSection(title: "Server Settings", cells: [SettingsTableSection.CellData(type: .button, label: "Foo"),
-                                                               SettingsTableSection.CellData(type: .button, label: "bar")
-                                                              ])
-//    SettingsTableSection(title: "FTP", cells: <#T##[SettingsTableSection.SettingsTableCellData]#>),
-//    SettingsTableSection(title: "Printer", cells: <#T##[SettingsTableSection.SettingsTableCellData]#>),
-//    SettingsTableSection(title: "btn-refreshSettings", cells: <#T##[SettingsTableSection.SettingsTableCellData]#>),
-//    SettingsTableSection(title: "Btn-TouchID", cells: <#T##[SettingsTableSection.SettingsTableCellData]#>)
-    ]
+    var tableSections: [TableSection] = []
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
         setupTableView()
+        
+        tableSections = [
+            TableSection(title: "Server Settings!", cells: [
+                TableSection.CellData(.textField, label: "Tap to edit", closure: { print("closure!") }),
+                TableSection.CellData(.button, label: "Refresh Settings", closure: { self.trailingButtonAction() }) ]),
+            TableSection(title: "FTP", cells: [
+                TableSection.CellData(.textField, label: "Username"),
+                TableSection.CellData(.textField, label: "Password") ]),
+            TableSection(title: "Printer", cells: [
+                TableSection.CellData(.textField, label: "Regular"),
+                TableSection.CellData(.navigationbutton, label: "Barcode", closure: {  }) ]),
+            TableSection(title: "btn-refreshSettings", cells: [
+                TableSection.CellData(.button, label: "Refresh Settings", closure: {  }) ]),
+            TableSection(title: "Btn-TouchID", cells: [
+                TableSection.CellData(.button, label: "Setup Biometric Authentication", closure: {  }) ])
+        ]
     }
     
     
@@ -40,14 +48,17 @@ class DashboardViewController: UITableViewController {
         struct CellData {
             var type: CellType
             var label: String
+            var closure: (() -> ())
 //            var placeholder: String
+            
             enum CellType {
                 case button, navigationbutton, textField
             }
             
-            init(type: CellType, label: String) {
+            init(_ type: CellType, label: String, closure: @escaping (() -> ()) = {}) {
                 self.type = type
                 self.label = label
+                self.closure = closure
             }
         }
     }
@@ -59,9 +70,13 @@ class DashboardViewController: UITableViewController {
     private func setupTableView() {
         tableView = UITableView(frame: tableView.frame, style: .insetGrouped)
         tableView.register(DashboardTableCellTextField.self, forCellReuseIdentifier: "\(DashboardTableCellTextField.self)")
+        tableView.register(DashboardTableCellButton.self, forCellReuseIdentifier: "\(DashboardTableCellButton.self)")
         tableView.dataSource = self
         tableView.delegate = self
-        //tableView.rowHeight = 44
+        /*Added in order to silence warning: "Detected a case where constraints ambiguously suggest a height of zero"
+         Warning comming from DashboardTableCellButton.label
+         */
+        tableView.rowHeight = 44
     }
     
     
@@ -90,6 +105,10 @@ class DashboardViewController: UITableViewController {
 //MARK: - UITableView
 extension DashboardViewController {
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        tableSections.count
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return tableSections[section].title
     }
@@ -100,39 +119,44 @@ extension DashboardViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellData: SettingsTableSection.CellData = tableSections[indexPath.section].cells[indexPath.row]
+        let cellData: TableSection.CellData = tableSections[indexPath.section].cells[indexPath.row]
                 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellTextField.self)",
-                                                    for: indexPath) as? DashboardTableCellTextField {
-            //cell.accessoryType = .none
+                                                    for: indexPath) as? DashboardTableCellTextField, cellData.type == .textField  {
+//            cell.accessoryType = .none
             cell.textField.delegate = self
             cell.textField.placeholder = cellData.label
-            cell.textField.tag = 4
-            cell.tag = 3
+            cell.textField.tag = indexPath.row
+            cell.tag = indexPath.row
+            cell.selectionStyle = .none     //Used in order to prevent textField cells from highlighting when tapped
+            return cell
+            
+        } else if let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellButton.self)",
+                                                           for: indexPath) as? DashboardTableCellButton, cellData.type == .button {
+            cell.label.text = cellData.label
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellTextField.self)", for: indexPath)
-            cell.accessoryType = .none
-            let textField: UITextField = UITextField()
-            textField.translatesAutoresizingMaskIntoConstraints = false
-            cell.contentView.addSubview(textField)
-            textField.delegate = self
-            textField.tag = 11
-            NSLayoutConstraint.activate([
-                textField.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
-                textField.leadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor),
-                textField.centerYAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.centerYAnchor),
-                textField.trailingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.trailingAnchor)
-            ])
-            return cell
+            return tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellTextField.self)", for: indexPath)
         }
     }
     
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        print(indexPath)
+        let cellData = tableSections[indexPath.section].cells[indexPath.row]
+        cellData.closure()
+    }
+    
 }
 
 
+
+
+
+//MARK: - +UITextFieldDelegate
 extension DashboardViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -145,3 +169,39 @@ extension DashboardViewController: UITextFieldDelegate {
     
 }
 
+
+
+
+
+//MARK: - TableSection model
+extension DashboardViewController {
+    
+    struct TableSection {
+        var title: String
+        var cells: [CellData]
+        
+        init(title: String, cells: [CellData]) {
+            self.title = title
+            self.cells = cells
+        }
+        
+        
+        
+        struct CellData {
+            var type: CellType
+            var label: String
+            var closure: (() -> ())
+//            var placeholder: String
+            
+            enum CellType {
+                case button, navigationbutton, textField
+            }
+            
+            init(_ type: CellType, label: String, closure: @escaping (() -> ()) = {}) {
+                self.type = type
+                self.label = label
+                self.closure = closure
+            }
+        }
+    }
+}
