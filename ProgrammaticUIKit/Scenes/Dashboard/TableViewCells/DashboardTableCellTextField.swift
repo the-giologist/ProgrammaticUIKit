@@ -9,21 +9,34 @@ import UIKit
 
 class DashboardTableCellTextField: UITableViewCell {
     
-    let textField = UITextField()
-    
+    let label = UILabel()
+    let textField: UITextField = {
+       let textField = UITextField()
+        textField.textColor = .secondaryLabel
+        textField.backgroundColor = .red
+        return textField
+    }()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        //setup label
+        contentView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),  //silences warning
+            label.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
+            label.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+//            widthAnchor.constraint(greaterThanOrEqualToConstant: 1)
+        ])
+        
         //setup textField
-        self.contentView.addSubview(textField)
+        contentView.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.topAnchor),
-            textField.leadingAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.leadingAnchor),
-            textField.centerYAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.centerYAnchor),
-            textField.trailingAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.trailingAnchor)
+            textField.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
+            textField.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
         ])
     }
     
@@ -50,8 +63,11 @@ class DashboardTableCellButton: UITableViewCell {
         self.contentView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            //Added .topAnchor constraint to silence warning: "Detected a case where constraints ambiguously suggest a height of zero"
+            label.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
             label.leadingAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.leadingAnchor),
-            label.centerYAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.centerYAnchor)
+            label.centerYAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.centerYAnchor),
+//            label.widthAnchor.constraint(greaterThanOrEqualToConstant: 1)
         ])
     }
     

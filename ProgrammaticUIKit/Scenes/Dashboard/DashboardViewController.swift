@@ -33,38 +33,6 @@ class DashboardViewController: UITableViewController {
         ]
     }
     
-    
-    struct SettingsTableSection {
-        var title: String
-        var cells: [CellData]
-        
-        init(title: String, cells: [CellData]) {
-            self.title = title
-            self.cells = cells
-        }
-        
-        
-        
-        struct CellData {
-            var type: CellType
-            var label: String
-            var closure: (() -> ())
-//            var placeholder: String
-            
-            enum CellType {
-                case button, navigationbutton, textField
-            }
-            
-            init(_ type: CellType, label: String, closure: @escaping (() -> ()) = {}) {
-                self.type = type
-                self.label = label
-                self.closure = closure
-            }
-        }
-    }
-    
-    
-    
 
     
     private func setupTableView() {
@@ -76,7 +44,7 @@ class DashboardViewController: UITableViewController {
         /*Added in order to silence warning: "Detected a case where constraints ambiguously suggest a height of zero"
          Warning comming from DashboardTableCellButton.label
          */
-        tableView.rowHeight = 44
+//        tableView.rowHeight = 44
     }
     
     
@@ -124,8 +92,10 @@ extension DashboardViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellTextField.self)",
                                                     for: indexPath) as? DashboardTableCellTextField, cellData.type == .textField  {
 //            cell.accessoryType = .none
-            cell.textField.delegate = self
+            cell.label.text = cellData.label
             cell.textField.placeholder = cellData.label
+            
+            cell.textField.delegate = self
             cell.textField.tag = indexPath.row
             cell.tag = indexPath.row
             cell.selectionStyle = .none     //Used in order to prevent textField cells from highlighting when tapped
