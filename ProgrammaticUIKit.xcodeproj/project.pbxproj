@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		710645BD296DC89C006A789E /* DashboardTableCellTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710645BC296DC89C006A789E /* DashboardTableCellTextField.swift */; };
 		E230221A296D135900AEF808 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2302219296D135900AEF808 /* AppDelegate.swift */; };
 		E230221C296D135900AEF808 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230221B296D135900AEF808 /* SceneDelegate.swift */; };
 		E230221E296D135900AEF808 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230221D296D135900AEF808 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		710645BC296DC89C006A789E /* DashboardTableCellTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableCellTextField.swift; sourceTree = "<group>"; };
 		E2302216296D135900AEF808 /* ProgrammaticUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProgrammaticUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2302219296D135900AEF808 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E230221B296D135900AEF808 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		710645BB296DBE80006A789E /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				710645BC296DC89C006A789E /* DashboardTableCellTextField.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				E230221C296D135900AEF808 /* SceneDelegate.swift in Sources */,
 				E230222E296D16B900AEF808 /* DashboardViewController.swift in Sources */,
 				E2302230296D1A1900AEF808 /* ViewControllerWithUITableView.swift in Sources */,
+				710645BD296DC89C006A789E /* DashboardTableCellTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

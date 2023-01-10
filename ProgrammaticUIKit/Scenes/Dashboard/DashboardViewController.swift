@@ -58,7 +58,7 @@ class DashboardViewController: UITableViewController {
     
     private func setupTableView() {
         tableView = UITableView(frame: tableView.frame, style: .insetGrouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "\(DashboardViewController.self)")
+        tableView.register(DashboardTableCellTextField.self, forCellReuseIdentifier: "\(DashboardTableCellTextField.self)")
         tableView.dataSource = self
         tableView.delegate = self
         //tableView.rowHeight = 44
@@ -100,25 +100,35 @@ extension DashboardViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardViewController.self)", for: indexPath)
-        
-//        cell.textLabel?.text = tableSections[indexPath.section].cells[indexPath.row].label
+        let cellData: SettingsTableSection.CellData = tableSections[indexPath.section].cells[indexPath.row]
                 
-        cell.accessoryType = .none
-        var textField: UITextField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        cell.contentView.addSubview(textField)
-        textField.delegate = self
-        textField.tag = 11
-        NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
-            textField.leadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor),
-            textField.centerYAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.centerYAnchor),
-            textField.trailingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.trailingAnchor)
-        ])
-        
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellTextField.self)",
+                                                    for: indexPath) as? DashboardTableCellTextField {
+            //cell.accessoryType = .none
+            cell.textField.delegate = self
+            cell.textField.placeholder = cellData.label
+            cell.textField.tag = 4
+            cell.tag = 3
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellTextField.self)", for: indexPath)
+            cell.accessoryType = .none
+            let textField: UITextField = UITextField()
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            cell.contentView.addSubview(textField)
+            textField.delegate = self
+            textField.tag = 11
+            NSLayoutConstraint.activate([
+                textField.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
+                textField.leadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor),
+                textField.centerYAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.centerYAnchor),
+                textField.trailingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.trailingAnchor)
+            ])
+            return cell
+        }
     }
+    
     
 }
 
