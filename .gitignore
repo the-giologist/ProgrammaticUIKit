@@ -1,0 +1,29 @@
+# Created by Giovanni Peña
+# With references from: 
+	# https://www.toptal.com/developers/gitignore/api/xcode
+	# https://raw.githubusercontent.com/github/gitignore/master/Swift.gitignore
+
+
+### MacOS ###
+.DS_Store
+
+
+### Xcode ###
+## User settings
+xcuserdata/
+
+
+
+### Xcode Patch ###
+
+
+# End of .gitignore
+
+
+
+### Adding .gitignore file to Xcode Project Dir tutorial ###
+# Step 1.) Navigate to your project root directory using Terminal.
+# Step 2.) Use "ls -a" to list all files including hidden files.
+# Step 3.) Run "touch .gitignore" if no .gitignore file exists.
+# Step 4.) Open .gitignore file using "open .gitignore".
+# Step 5.) Close and Reopen projects for changes to take effect.
