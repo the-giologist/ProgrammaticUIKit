@@ -50,8 +50,17 @@
 		710645BA296DBDC9006A789E /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				710645BB296DBE80006A789E /* TableViewCells */,
+				E230222D296D16B900AEF808 /* DashboardViewController.swift */,
 			);
 			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		710645BB296DBE80006A789E /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		E230220D296D135900AEF808 = {
@@ -76,7 +85,6 @@
 				710645B9296DBD71006A789E /* Scenes */,
 				E2302219296D135900AEF808 /* AppDelegate.swift */,
 				E230221B296D135900AEF808 /* SceneDelegate.swift */,
-				E230222D296D16B900AEF808 /* DashboardViewController.swift */,
 				E230221D296D135900AEF808 /* ViewController.swift */,
 				E2302222296D135A00AEF808 /* Assets.xcassets */,
 				E2302224296D135A00AEF808 /* LaunchScreen.storyboard */,
