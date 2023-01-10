@@ -9,8 +9,9 @@ import UIKit
 
 class DashboardViewController: UITableViewController {
     var tableSections: [SettingsTableSection] = [
-        SettingsTableSection(title: "Server Settings", cells: [SettingsTableSection.CellData(type: .button, label: "idk")
-                                                          ])
+        SettingsTableSection(title: "Server Settings", cells: [SettingsTableSection.CellData(type: .button, label: "Foo"),
+                                                               SettingsTableSection.CellData(type: .button, label: "bar")
+                                                              ])
 //    SettingsTableSection(title: "FTP", cells: <#T##[SettingsTableSection.SettingsTableCellData]#>),
 //    SettingsTableSection(title: "Printer", cells: <#T##[SettingsTableSection.SettingsTableCellData]#>),
 //    SettingsTableSection(title: "btn-refreshSettings", cells: <#T##[SettingsTableSection.SettingsTableCellData]#>),
