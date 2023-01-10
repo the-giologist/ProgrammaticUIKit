@@ -13,6 +13,7 @@
 		E2302223296D135A00AEF808 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2302222296D135A00AEF808 /* Assets.xcassets */; };
 		E2302226296D135A00AEF808 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2302224296D135A00AEF808 /* LaunchScreen.storyboard */; };
 		E230222E296D16B900AEF808 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230222D296D16B900AEF808 /* DashboardViewController.swift */; };
+		E2302230296D1A1900AEF808 /* ViewControllerWithUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230222F296D1A1900AEF808 /* ViewControllerWithUITableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E2302225296D135A00AEF808 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2302227296D135A00AEF808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E230222D296D16B900AEF808 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		E230222F296D1A1900AEF808 /* ViewControllerWithUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithUITableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				E2302222296D135A00AEF808 /* Assets.xcassets */,
 				E2302224296D135A00AEF808 /* LaunchScreen.storyboard */,
 				E2302227296D135A00AEF808 /* Info.plist */,
+				E230222F296D1A1900AEF808 /* ViewControllerWithUITableView.swift */,
 			);
 			path = ProgrammaticUIKit;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				E230221A296D135900AEF808 /* AppDelegate.swift in Sources */,
 				E230221C296D135900AEF808 /* SceneDelegate.swift in Sources */,
 				E230222E296D16B900AEF808 /* DashboardViewController.swift in Sources */,
+				E2302230296D1A1900AEF808 /* ViewControllerWithUITableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
