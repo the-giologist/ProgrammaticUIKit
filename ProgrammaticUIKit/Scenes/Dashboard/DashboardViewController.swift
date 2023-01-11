@@ -25,11 +25,11 @@ class DashboardViewController: UITableViewController {
                 TableSection.CellData(.textField, label: "Password") ]),
             TableSection(title: "Printer", cells: [
                 TableSection.CellData(.textField, label: "Regular"),
-                TableSection.CellData(.navigationbutton, label: "Barcode", closure: {  }) ]),
-            TableSection(title: "btn-refreshSettings", cells: [
-                TableSection.CellData(.button, label: "Refresh Settings", closure: {  }) ]),
-            TableSection(title: "Btn-TouchID", cells: [
-                TableSection.CellData(.button, label: "Setup Biometric Authentication", closure: {  }) ])
+                TableSection.CellData(.navigationbutton, label: "Barcode", closure: { self.showWarning() }) ]),
+            TableSection(cells: [
+                TableSection.CellData(.button, label: "Refresh Settings", closure: { self.showView() }) ]),
+            TableSection(cells: [
+                TableSection.CellData(.button, label: "Setup Biometric Authentication", closure: { self.showWarning() }) ])
         ]
     }
     
@@ -60,7 +60,16 @@ class DashboardViewController: UITableViewController {
     @objc func trailingButtonAction() {
         print("tbd...")
     }
+    
+    
+    private func showWarning() {
+        print("showingWarning")
+    }
 
+    
+    private func showView() {
+        print("showingView")
+    }
 }
 
 
@@ -91,14 +100,12 @@ extension DashboardViewController {
                 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellTextField.self)",
                                                     for: indexPath) as? DashboardTableCellTextField, cellData.type == .textField  {
-//            cell.accessoryType = .none
-            cell.label.text = cellData.label
-            cell.textField.placeholder = cellData.label
-            
-            cell.textField.delegate = self
-            cell.textField.tag = indexPath.row
+            //cell.accessoryType = .none
             cell.tag = indexPath.row
-            cell.selectionStyle = .none     //Used in order to prevent textField cells from highlighting when tapped
+            cell.label.text = cellData.label
+            cell.textField.tag = indexPath.row
+            cell.textField.delegate = self
+            cell.textField.placeholder = cellData.label
             return cell
             
         } else if let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellButton.self)",
@@ -115,9 +122,23 @@ extension DashboardViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        print(indexPath)
+        print("didSelect: \(indexPath)")
         let cellData = tableSections[indexPath.section].cells[indexPath.row]
+        guard cellData.type == .button else { return }
         cellData.closure()
+        
+        let alert = UIAlertController(title: "title", message: "message", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "actionTitle", style: .default, handler: { _ in
+            print("pressedAlertAction")
+        }))
+        alert.addAction(UIAlertAction(title: "destructiveTitle", style: .destructive, handler: { _ in
+            print("pressedAlertAction")
+        }))
+        alert.addAction(UIAlertAction(title: "cancelTitle", style: .cancel, handler: { _ in
+            print("pressedAlertAction")
+        }))
+        self.present(alert, animated: true)
+        
     }
     
 }
@@ -147,10 +168,10 @@ extension DashboardViewController: UITextFieldDelegate {
 extension DashboardViewController {
     
     struct TableSection {
-        var title: String
+        var title: String?
         var cells: [CellData]
         
-        init(title: String, cells: [CellData]) {
+        init(title: String? = nil, cells: [CellData]) {
             self.title = title
             self.cells = cells
         }

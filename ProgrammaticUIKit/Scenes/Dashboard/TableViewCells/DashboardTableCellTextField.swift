@@ -13,13 +13,14 @@ class DashboardTableCellTextField: UITableViewCell {
     let textField: UITextField = {
        let textField = UITextField()
         textField.textColor = .secondaryLabel
-        textField.backgroundColor = .red
+        textField.backgroundColor = .red.withAlphaComponent(0.1)
         return textField
     }()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none //Used in order to prevent cell from highlighting when tapped.
         
         //setup label
         contentView.addSubview(label)
@@ -37,6 +38,7 @@ class DashboardTableCellTextField: UITableViewCell {
         NSLayoutConstraint.activate([
             textField.centerYAnchor.constraint(equalTo: contentView.layoutMarginsGuide.centerYAnchor),
             textField.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+            textField.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 10)
         ])
     }
     
