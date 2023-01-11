@@ -10,6 +10,7 @@ import UIKit
 class DashboardViewController: UITableViewController {
     var tableSections: [TableSection] = []
     
+    var pickerDatabase = PickerDatabase()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,13 +20,14 @@ class DashboardViewController: UITableViewController {
         tableSections = [
             TableSection(title: "Server Settings!", cells: [
                 TableSection.CellData(.textField, label: "Tap to edit"),
-                TableSection.CellData(.button, label: "Database", accessoryType: .disclosureIndicator, closure: { self.navigationController?.present(PickerDatabase(), animated: true) }) ]) ,
+                TableSection.CellData(.button, label: "Database", accessoryType: .disclosureIndicator, closure: { self.navigationController?.pushViewController(self.pickerDatabase, animated: true) }) ]),
             TableSection(title: "FTP", cells: [
                 TableSection.CellData(.textField, label: "Username"),
                 TableSection.CellData(.textField, label: "Password") ]),
             TableSection(title: "Printer", cells: [
                 TableSection.CellData(.textField, label: "Regular"),
-                TableSection.CellData(.button, label: "Barcode", accessoryType: .disclosureIndicator, closure: { self.navigationController?.present(PickerDatabase(), animated: true) }) ]),
+                TableSection.CellData(.button, label: "Barcode", accessoryType: .disclosureIndicator, closure: {
+                    self.showWarning() }) ]),
             TableSection(cells: [
                 TableSection.CellData(.button, label: "Refresh Settings", closure: { self.showView() }) ]),
             TableSection(cells: [
@@ -33,9 +35,17 @@ class DashboardViewController: UITableViewController {
         ]
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.refreshControl?.beginRefreshing()
+    }
+    
 
     
     private func setupTableView() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(trailingButtonAction), for: .valueChanged)
+        
         tableView = UITableView(frame: tableView.frame, style: .insetGrouped)
         tableView.register(DashboardTableCellTextField.self, forCellReuseIdentifier: "\(DashboardTableCellTextField.self)")
         tableView.register(DashboardTableCellButton.self, forCellReuseIdentifier: "\(DashboardTableCellButton.self)")
