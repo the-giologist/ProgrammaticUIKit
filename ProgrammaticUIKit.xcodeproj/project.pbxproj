@@ -14,6 +14,7 @@
 		E2302226296D135A00AEF808 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2302224296D135A00AEF808 /* LaunchScreen.storyboard */; };
 		E230222E296D16B900AEF808 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230222D296D16B900AEF808 /* DashboardViewController.swift */; };
 		E2302230296D1A1900AEF808 /* ViewControllerWithUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230222F296D1A1900AEF808 /* ViewControllerWithUITableView.swift */; };
+		E24AC547296E5E8B002CE540 /* PickerDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24AC546296E5E8B002CE540 /* PickerDatabase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		E2302227296D135A00AEF808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E230222D296D16B900AEF808 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		E230222F296D1A1900AEF808 /* ViewControllerWithUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithUITableView.swift; sourceTree = "<group>"; };
+		E24AC546296E5E8B002CE540 /* PickerDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerDatabase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				710645BC296DC89C006A789E /* DashboardTableCellTextField.swift */,
+				E24AC546296E5E8B002CE540 /* PickerDatabase.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			files = (
 				E230221A296D135900AEF808 /* AppDelegate.swift in Sources */,
 				E230221C296D135900AEF808 /* SceneDelegate.swift in Sources */,
+				E24AC547296E5E8B002CE540 /* PickerDatabase.swift in Sources */,
 				E230222E296D16B900AEF808 /* DashboardViewController.swift in Sources */,
 				E2302230296D1A1900AEF808 /* ViewControllerWithUITableView.swift in Sources */,
 				710645BD296DC89C006A789E /* DashboardTableCellTextField.swift in Sources */,

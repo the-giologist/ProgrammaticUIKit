@@ -18,14 +18,14 @@ class DashboardViewController: UITableViewController {
         
         tableSections = [
             TableSection(title: "Server Settings!", cells: [
-                TableSection.CellData(.textField, label: "Tap to edit", closure: { print("closure!") }),
-                TableSection.CellData(.button, label: "Refresh Settings", closure: { self.trailingButtonAction() }) ]),
+                TableSection.CellData(.textField, label: "Tap to edit"),
+                TableSection.CellData(.button, label: "Database", accessoryType: .disclosureIndicator, closure: { self.navigationController?.present(PickerDatabase(), animated: true) }) ]) ,
             TableSection(title: "FTP", cells: [
                 TableSection.CellData(.textField, label: "Username"),
                 TableSection.CellData(.textField, label: "Password") ]),
             TableSection(title: "Printer", cells: [
                 TableSection.CellData(.textField, label: "Regular"),
-                TableSection.CellData(.navigationbutton, label: "Barcode", closure: { self.showWarning() }) ]),
+                TableSection.CellData(.button, label: "Barcode", accessoryType: .disclosureIndicator, closure: { self.navigationController?.present(PickerDatabase(), animated: true) }) ]),
             TableSection(cells: [
                 TableSection.CellData(.button, label: "Refresh Settings", closure: { self.showView() }) ]),
             TableSection(cells: [
@@ -110,6 +110,7 @@ extension DashboardViewController {
             
         } else if let cell = tableView.dequeueReusableCell(withIdentifier: "\(DashboardTableCellButton.self)",
                                                            for: indexPath) as? DashboardTableCellButton, cellData.type == .button {
+            cell.accessoryType = cellData.accessoryType
             cell.label.text = cellData.label
             return cell
             
@@ -124,20 +125,31 @@ extension DashboardViewController {
         
         print("didSelect: \(indexPath)")
         let cellData = tableSections[indexPath.section].cells[indexPath.row]
-        guard cellData.type == .button else { return }
-        cellData.closure()
         
-        let alert = UIAlertController(title: "title", message: "message", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "actionTitle", style: .default, handler: { _ in
-            print("pressedAlertAction")
-        }))
-        alert.addAction(UIAlertAction(title: "destructiveTitle", style: .destructive, handler: { _ in
-            print("pressedAlertAction")
-        }))
-        alert.addAction(UIAlertAction(title: "cancelTitle", style: .cancel, handler: { _ in
-            print("pressedAlertAction")
-        }))
-        self.present(alert, animated: true)
+        if (cellData.type == .button) {
+            if (cellData.accessoryType == .disclosureIndicator) {
+                cellData.closure()
+                
+            } else {
+                let alert = UIAlertController(title: "title", message: "message", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "actionTitle", style: .default, handler: { _ in
+                    print("pressedAlertAction")
+                }))
+                alert.addAction(UIAlertAction(title: "destructiveTitle", style: .destructive, handler: { _ in
+                    print("pressedAlertAction")
+                }))
+                alert.addAction(UIAlertAction(title: "cancelTitle", style: .cancel, handler: { _ in
+                    print("pressedAlertAction")
+                }))
+                self.present(alert, animated: true)
+            }
+            
+            
+        } else if (cellData.type == .navigationbutton) {
+            cellData.closure()
+        }
+        
+        
         
     }
     
@@ -181,6 +193,7 @@ extension DashboardViewController {
         struct CellData {
             var type: CellType
             var label: String
+            var accessoryType: UITableViewCell.AccessoryType
             var closure: (() -> ())
 //            var placeholder: String
             
@@ -188,9 +201,10 @@ extension DashboardViewController {
                 case button, navigationbutton, textField
             }
             
-            init(_ type: CellType, label: String, closure: @escaping (() -> ()) = {}) {
+            init(_ type: CellType, label: String, accessoryType: UITableViewCell.AccessoryType = .none, closure: @escaping (() -> ()) = {}) {
                 self.type = type
                 self.label = label
+                self.accessoryType = accessoryType
                 self.closure = closure
             }
         }
